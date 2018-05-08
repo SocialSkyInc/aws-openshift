@@ -16,7 +16,7 @@ aws cloudformation create-stack \
  --capabilities=CAPABILITY_IAM
  ```
 
- ## update stack
+## update stack
 ```
 aws cloudformation update-stack \
  --region eu-central-1 \
@@ -28,12 +28,14 @@ aws cloudformation update-stack \
  --capabilities=CAPABILITY_IAM
  ```
 
+## access
 
- ## access
- `ssh -i ./ssh_keys/ansible-eu-central-1 centos@awshost`
+`ssh -i ./ssh_keys/ansible-eu-central-1 centos@awshost`
 
- ## prepare
- `ansible-playbook prepare.yml -i hosts.contiv --key-file ./ssh_keys/ansible-eu-central-1`
+## prepare
 
- ## run playbook
- `ansible-playbook -c paramiko -i hosts.contiv openshift-ansible/playbooks/byo/config.yml --key-file ./ssh_keys/ansible-eu-central-1`
+`ansible-playbook prepare.yml -i hosts.contiv --key-file ./ssh_keys/ansible-eu-central-1`
+
+## run playbook
+
+`ansible-playbook -c paramiko -i hosts.contiv openshift-ansible/playbooks/byo/config.yml --key-file ./ssh_keys/ansible-eu-central-1`
