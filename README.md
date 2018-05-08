@@ -14,7 +14,7 @@ aws cloudformation create-stack \
    ParameterKey=AvailabilityZone,ParameterValue=eu-central-1a \
    ParameterKey=KeyName,ParameterValue=ansible-eu-central-1 \
  --capabilities=CAPABILITY_IAM
- ```
+```
 
 ## update stack
 ```
@@ -26,7 +26,7 @@ aws cloudformation update-stack \
    ParameterKey=AvailabilityZone,ParameterValue=eu-central-1a \
    ParameterKey=KeyName,ParameterValue=ansible-eu-central-1 \
  --capabilities=CAPABILITY_IAM
- ```
+```
 
 ## access
 
