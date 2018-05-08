@@ -1,0 +1,41 @@
+[OSEv3:children]
+masters
+etcd
+nodes
+
+[OSEv3:vars]
+ansible_ssh_user=centos
+ansible_sudo=true
+ansible_become=true
+
+deployment_type=origin
+
+openshift_docker_options='--selinux-enabled --insecure-registry 172.30.0.0/16'
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/openshift/openshift-passwd'}]
+openshift_disable_check=disk_availability,docker_storage,memory_availability
+
+#changes for contiv
+#see http://contiv.github.io/documents/openshift/index.html
+openshift_release=v3.6
+os_firewall_use_firewalld=false
+openshift_use_openshift_sdn=False
+openshift_use_contiv=True
+os_sdn_network_plugin_name='cni'
+netplugin_interface=eth0
+netmaster_interface=eth0
+netplugin_fwd_mode=routing
+contiv_encap_mode=vxlan
+contiv_default_network_tag=1000
+#error dict object' has no attribute u'ansible_eno16780032
+contiv_netmaster_interface=eth0
+contiv_netplugin_interface=eth0
+
+[masters]
+ec2-18-184-177-169.eu-central-1.compute.amazonaws.com openshift_public_hostname=18.184.177.169
+
+[etcd]
+ec2-18-184-177-169.eu-central-1.compute.amazonaws.com openshift_public_hostname=18.184.177.169
+
+[nodes]
+ec2-18-184-177-169.eu-central-1.compute.amazonaws.com netplugin_ctrl_ip=10.0.0.5 openshift_public_hostname=18.184.177.169 openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+ec2-18-184-177-144.eu-central-1.compute.amazonaws.com netplugin_ctrl_ip=10.0.0.13 openshift_public_hostname=18.184.177.144 openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
