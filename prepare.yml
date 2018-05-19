@@ -6,12 +6,19 @@
       raw: sudo yum install -y python
 
   tasks:
-
+    # - shell: uname -r
+    #   ignore_errors: yes
+    #   register: kernel_release
+      
     - name: upgrade packages
       yum: state=latest name={{ item }}
       with_items:
+        # - "kernel-{{ kernel_release.stdout }}"
+        # - kernel-devel 
+        # - kernel-headers
         - docker
         - NetworkManager
+
 
     - name: enable network-manager
       shell: systemctl enable NetworkManager && systemctl start NetworkManager

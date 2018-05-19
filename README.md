@@ -16,7 +16,7 @@ aws cloudformation create-stack \
  --capabilities=CAPABILITY_IAM
 ```
 
-## update stack
+## update stack (optional)
 ```
 aws cloudformation update-stack \
  --region eu-central-1 \
@@ -27,14 +27,21 @@ aws cloudformation update-stack \
    ParameterKey=KeyName,ParameterValue=ansible-eu-central-1 \
  --capabilities=CAPABILITY_IAM
 ```
+## delete stack
 
-## access
+`aws cloudformation delete-stack --stack-name=sysdig-origin-1`
 
-`ssh -i ./ssh_keys/ansible-eu-central-1 centos@awshost`
+## ssh access
 
-## prepare
+`ssh -i ./ssh_keys/ansible-eu-central-1 centos@<AWS_HOST_IP>`
 
-`ansible-playbook prepare.yml -i hosts.contiv --key-file ./ssh_keys/ansible-eu-central-1`
+## prepare (for vagrant use only)
+* `sudo chown -R vagrant /tmp`
+* distribute ssh key to nodes
+* add host entries to `/etc/hosts
+`
+## prepare (for aws use only)
+* `ansible-playbook prepare.yml -i hosts.contiv --key-file ./ssh_keys/ansible-eu-central-1`
 
 ## run playbook
 
