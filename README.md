@@ -1,8 +1,9 @@
 ## Links
 see here https://sysdig.com/blog/deploy-openshift-aws/
 
+## prerequisites
 
-1. copy cloudformation.yml to s3
+copy template to S3: `aws s3 cp ./s3/ s3://sysdig-cloudformation/  --recursive`
 
 ## create stack
 ```
