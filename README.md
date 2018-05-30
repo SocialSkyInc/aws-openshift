@@ -47,3 +47,10 @@ aws cloudformation update-stack \
 ## run playbook
 
 `ansible-playbook -c paramiko -i hosts.contiv openshift-ansible/playbooks/byo/config.yml --key-file ./ssh_keys/ansible-eu-central-1`
+
+
+## create user
+
+`htpasswd /etc/openshift/openshift-passwd altemista`
+
+Password: `alt3m1$ta`

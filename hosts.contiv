@@ -4,7 +4,7 @@ etcd
 nodes
 
 [OSEv3:vars]
-ansible_ssh_user=root
+ansible_ssh_user=centos
 ansible_sudo=true
 ansible_become=true
 
@@ -31,11 +31,11 @@ contiv_netmaster_interface=eth0
 contiv_netplugin_interface=eth0
 
 [masters]
-ip-10-0-0-7.eu-central-1.compute.internal openshift_public_hostname=ec2-18-184-36-173.eu-central-1.compute.amazonaws.com
+ip-10-0-0-12.eu-central-1.compute.internal openshift_public_hostname=ec2-52-58-52-138.eu-central-1.compute.amazonaws.com
 
 [etcd]
-ip-10-0-0-7.eu-central-1.compute.internal openshift_public_hostname=ec2-18-184-36-173.eu-central-1.compute.amazonaws.com
+ip-10-0-0-12.eu-central-1.compute.internal openshift_public_hostname=ec2-52-58-52-138.eu-central-1.compute.amazonaws.com
 
 [nodes]
-ip-10-0-0-7.eu-central-1.compute.internal netplugin_ctrl_ip=10.0.0.7 openshift_public_hostname=ec2-18-184-36-173.eu-central-1.compute.amazonaws.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-ip-10-0-0-10.eu-central-1.compute.internal netplugin_ctrl_ip=10.0.0.10 openshift_public_hostname=ec2-18-184-176-90.eu-central-1.compute.amazonaws.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-0-12.eu-central-1.compute.internal netplugin_ctrl_ip=10.0.0.12 openshift_public_hostname=ec2-52-58-52-138.eu-central-1.compute.amazonaws.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+ip-10-0-0-4.eu-central-1.compute.internal netplugin_ctrl_ip=10.0.0.4 openshift_public_hostname=ec2-18-196-45-197.eu-central-1.compute.amazonaws.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
