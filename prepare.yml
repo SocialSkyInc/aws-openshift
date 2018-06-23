@@ -6,30 +6,32 @@
       raw: sudo yum install -y python
 
   tasks:
-    # - shell: uname -r
-    #   ignore_errors: yes
-    #   register: kernel_release
-      
+
     - name: upgrade packages
       yum: state=latest name={{ item }}
       with_items:
-        # - "kernel-{{ kernel_release.stdout }}"
-        # - kernel-devel 
-        # - kernel-headers
         - docker
         - NetworkManager
 
+    - name: download get-pip.py
+      get_url: url=https://bootstrap.pypa.io/get-pip.py  dest=/tmp
+    
+    - name: install pip
+      command: "python /tmp/get-pip.py"
+    
+    - name: delete get-pip.py
+      file: state=absent path=/tmp/get-pip.py
+
+    - name: Install python module (required for openshift 3.9)
+      pip:
+        name: "{{item}}"
+      with_items:
+        - pyyaml 
+        - py2-ipaddress
 
     - name: enable network-manager
-      shell: systemctl enable NetworkManager && systemctl start NetworkManager
-
-    - name: docker storage conf file
-      copy:
-        content: "DEVS=/dev/xvdb\nVG=docker-vg\n"
-        dest: /etc/sysconfig/docker-storage-setup
-
-    - name: docker-storage-setup
-      shell: docker-storage-setup
+      shell: systemctl enable NetworkManager && systemctl start NetworkManager   
 
     - name: enable docker
       shell: systemctl enable docker && systemctl start docker
+      ignore_errors: yes

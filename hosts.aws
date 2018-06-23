@@ -1,0 +1,35 @@
+[OSEv3:children]
+masters
+etcd
+nodes
+glusterfs
+
+[OSEv3:vars]
+ansible_ssh_user=centos
+ansible_sudo=true
+ansible_become=true
+
+deployment_type=origin
+openshift_release=v3.9
+openshift_master_dynamic_provisioning_enabled=True
+openshift_master_default_subdomain=mayasoft.de
+
+openshift_docker_options='--selinux-enabled --insecure-registry 172.30.0.0/16'
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/openshift/openshift-passwd'}]
+openshift_disable_check=docker_image_availability,package_availability,package_version,disk_availability,docker_storage,memory_availability
+
+[masters]
+ip-10-0-0-11.eu-central-1.compute.internal
+
+[etcd]
+ip-10-0-0-11.eu-central-1.compute.internal
+
+[nodes]
+ip-10-0-0-11.eu-central-1.compute.internal openshift_node_labels="{'region': 'infra', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-0-12.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-0-9.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
+
+[glusterfs]
+ip-10-0-0-11.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
+ip-10-0-0-12.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
+ip-10-0-0-9.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
