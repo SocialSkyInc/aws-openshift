@@ -1,6 +1,7 @@
 # Openshift deployment on AWS
 
 ## prerequisites
+* `git clone --recursive <this_repo>`
 * `ssh-keygen -N "" -t rsa -b 4096 -C "your_email@example.com" -f ./ssh-keys/andrejmaya-eu-central-1`
 * `aws ec2 import-key-pair --key-name andrejmaya-eu-central-1 --public-key-material file://./ssh-keys/andrejmaya-eu-central-1.pub`
 * go to https://aws.amazon.com/marketplace/pp?sku=aw0evgkw8e5c1q413zgy5pjce and accept
@@ -13,7 +14,6 @@ aws cloudformation create-stack \
  --parameters \
    ParameterKey=AvailabilityZone,ParameterValue=eu-central-1a \
    ParameterKey=KeyName,ParameterValue=andrejmaya-eu-central-1 \
-   ParameterKey=InstanceType,ParameterValue=t2.small \
  --capabilities=CAPABILITY_IAM
 ```
 * go the AWS console and put the *Private DNS* names into the `hosts.aws`
@@ -54,3 +54,8 @@ Password: `developer`
 
 ## update cloudformation temaplte
 * `aws s3 cp ./s3/ s3://sysdig-cloudformation/  --recursive`
+
+
+## troubleshooting
+if gets stucked at "template_service_broker : Verify that TSB is running"
+* oc get events -n openshift-template-service-broker
