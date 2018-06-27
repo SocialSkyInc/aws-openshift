@@ -1,6 +1,9 @@
 # Openshift deployment on AWS
 
+
+![architecture](./resources/aws-openshift.png)
 ## prerequisites
+* ansible 2.5.5
 * `git clone --recursive <this_repo>`
 * `ssh-keygen -N "" -t rsa -b 4096 -C "your_email@example.com" -f ./ssh-keys/andrejmaya-eu-central-1`
 * `aws ec2 import-key-pair --key-name andrejmaya-eu-central-1 --public-key-material file://./ssh-keys/andrejmaya-eu-central-1.pub`
@@ -24,10 +27,6 @@ aws cloudformation create-stack \
 18.196.46.153 ip-10-0-0-3.eu-central-1.compute.internal
 ```
 
-
-## ssh access
-`ssh -i ./ssh-keys/ansible-eu-central-1 centos@<AWS_HOST_IP>`
-
 `
 ## run playbooks
 * `ansible-playbook prepare.yml -i hosts.aws --key-file ./ssh-keys/andrejmaya-eu-central-1`
@@ -46,15 +45,23 @@ Password: `developer`
 1. `ansible-playbook -i hosts.aws ./openshift-ansible/playbooks/openshift-glusterfs/uninstall.yml --key-file ./ssh-keys/andrejmaya-eu-central-1`
 1. `ansible-playbook -i hosts.aws ./openshift-ansible/playbooks/adhoc/uninstall.yml --key-file ./ssh-keys/andrejmaya-eu-central-1`
 1. execute this on the glusterfs nodes:
+    1. `sudo su`
+    1. `vgs`
     1. `vgremove -f <name_of_the_vg>`
-    1. `pvremove -v -f /dev/sdb`
+    1. `pvremove -v -f /dev/xvdb`
 
 ## delete stack
 `aws cloudformation delete-stack --stack-name=sysdig-origin-1`
 
-## update cloudformation temaplte
+## update cloudformation template
 * `aws s3 cp ./s3/ s3://sysdig-cloudformation/  --recursive`
 
+
+## ssh access
+`ssh -i ./ssh-keys/ansible-eu-central-1 centos@<AWS_HOST_IP>`
+
+## own domain
+If you want to use your own Route53 domain, add `Domainname` parameter to cloudformation command.
 
 ## troubleshooting
 if gets stucked at "template_service_broker : Verify that TSB is running"

@@ -14,8 +14,8 @@ openshift_release=v3.9
 openshift_master_dynamic_provisioning_enabled=True
 
 #if you have a public DNS name?
-#openshift_master_default_subdomain=example.com
-#openshift_master_cluster_public_hostname=example.com
+#openshift_master_default_subdomain=18.185.109.91.nip.io
+#openshift_master_cluster_public_hostname=18.185.109.91.nip.io
 
 
 openshift_docker_options='--selinux-enabled --insecure-registry 172.30.0.0/16'
@@ -23,17 +23,17 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 openshift_disable_check=docker_image_availability,package_availability,package_version,disk_availability,docker_storage,memory_availability
 
 [masters]
-ip-10-0-1-190.eu-central-1.compute.internal
+ip-10-0-1-140.eu-central-1.compute.internal
 
 [etcd]
-ip-10-0-1-190.eu-central-1.compute.internal
+ip-10-0-1-140.eu-central-1.compute.internal
 
 [nodes]
-ip-10-0-1-190.eu-central-1.compute.internal openshift_node_labels="{'region': 'infra', 'zone': 'east'}" openshift_schedulable=true
-ip-10-0-1-143.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
-ip-10-0-1-158.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-1-140.eu-central-1.compute.internal openshift_node_labels="{'region': 'infra', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-1-43.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
+ip-10-0-1-57.eu-central-1.compute.internal openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
 
 [glusterfs]
-ip-10-0-1-190.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
-ip-10-0-1-143.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
-ip-10-0-1-158.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
+ip-10-0-1-140.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
+ip-10-0-1-43.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
+ip-10-0-1-57.eu-central-1.compute.internal glusterfs_devices='[ "/dev/xvdb"]'
